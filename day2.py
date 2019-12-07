@@ -1,29 +1,39 @@
 FILENAME = "input2.txt"
 
 
-def main1():
+def main1(noun, verb):
     with open(FILENAME) as f:
         line = f.readline()
-        thelist = line.split(",")
-    thelist[1] = "12"
-    thelist[2] = "2"
+    thelist = line.split(",")
+    thelist = [int(it) for it in thelist]
+    thelist[1] = noun
+    thelist[2] = verb
     iterator = iter(thelist)
-    opcode = int(next(iterator))
+    opcode = next(iterator)
     while opcode != 99:
-        op1 = int(next(iterator))
-        op2 = int(next(iterator))
-        loc = int(next(iterator))
+        op1 = next(iterator)
+        op2 = next(iterator)
+        loc = next(iterator)
         if opcode == 1:
-            res = int(thelist[op1]) + int(thelist[op2])
+            res = thelist[op1] + thelist[op2]
         elif opcode == 2:
-            res = int(thelist[op1]) * int(thelist[op2])
+            res = thelist[op1] * thelist[op2]
         else:
             print("Danger, Will Robinson!")
             return
         thelist[loc] = res
-        opcode = int(next(iterator))
-    print(thelist[0])
+        opcode = next(iterator)
+    return thelist[0]
+
+
+def main2():
+    for noun in range(0, 100):
+        for verb in range(0, 100):
+            output = main1(noun, verb)
+            if output == 19690720:
+                return noun, verb
 
 
 if __name__ == "__main__":
-    main1()
+    print(main1(12, 2))
+    print(main2())
