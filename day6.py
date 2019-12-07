@@ -4,12 +4,8 @@ FILENAME = 'input6.txt'
 
 
 class OrbitNode:
-    def __init__(self, parent=None):
-        self.nodes = []
-        self.parent = parent
-
-    def add_node(self, node):
-        self.nodes.append(node)
+    def __init__(self):
+        self.parent = None
 
     def get_parent_orbit_count(self):
         if self.parent == None:
@@ -25,7 +21,6 @@ def main():
             parent_id, child_id = line.strip().split(")")
             child = orbits[child_id]
             parent = orbits[parent_id]
-            parent.add_node(child)
             child.parent = parent
     total_orbits = 0
     for v in orbits.values():
